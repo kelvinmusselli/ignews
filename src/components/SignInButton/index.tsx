@@ -7,7 +7,7 @@ export function SignInButton() {
   const isUserLoggedIn = true;
 
   return isUserLoggedIn ? (
-     <button className={styles.signInButton} type="button">
+    <button className={styles.signInButton} type="button">
       <FaGithub color='#04d361'/>
       Kelvin Musselli
       <FiX color='#737380' className={styles.closeIcon} />
