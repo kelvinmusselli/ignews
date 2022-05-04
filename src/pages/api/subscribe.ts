@@ -1,6 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { NextApiRequest, NextApiResponse } from 'next';
+import { Query as q } from 'faunadb';
 import { getSession } from 'next-auth/react'; // pega do front o user autenticado
+import { fauna } from '../../services/fauna';
 import { stripe } from '../../services/stripe';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,6 +13,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const stripeCustomer = await stripe.customers.create({
       email: session.user.email,
     });
+
+    await fauna.query(
+      q.Update()
+    )
 
     const checkoutSession =  await stripe.checkout.sessions.create({
       customer: stripeCustomer.id,
